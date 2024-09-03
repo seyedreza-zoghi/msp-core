@@ -38,6 +38,9 @@ public abstract class GenericBaseEntity<ID extends Serializable>  {
     @Column(name = "version")
     private Integer version;
 
+    @Column(name = "description")
+    private String description;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -49,21 +52,23 @@ public abstract class GenericBaseEntity<ID extends Serializable>  {
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "GenericBaseEntity{" +
                 "id=" + id +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", version=" + version +
+                ", description='" + description + '\'' +
                 '}';
     }
 
     @Override
-    public final boolean equals(Object object) {
+    public boolean equals(Object object) {
         if (this == object) return true;
-        if (object == null || ProxyUtils.getUserClass(this) != ProxyUtils.getUserClass(object))
-            return false;
-        GenericBaseEntity that = (GenericBaseEntity) object;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        if (object == null || getClass() != object.getClass()) return false;
+        GenericBaseEntity<?> that = (GenericBaseEntity<?>) object;
+        return Objects.equals(id, that.id) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(version, that.version) && Objects.equals(description, that.description);
     }
 
     @Override
