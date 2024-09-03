@@ -19,12 +19,12 @@ import java.util.Objects;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseEntity implements Serializable {
+public abstract class GenericBaseEntity<ID extends Serializable>  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+    private ID id;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -50,7 +50,7 @@ public class BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseEntity{" +
+        return "GenericBaseEntity{" +
                 "id=" + id +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
@@ -62,7 +62,7 @@ public class BaseEntity implements Serializable {
         if (this == object) return true;
         if (object == null || ProxyUtils.getUserClass(this) != ProxyUtils.getUserClass(object))
             return false;
-        BaseEntity that = (BaseEntity) object;
+        GenericBaseEntity that = (GenericBaseEntity) object;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

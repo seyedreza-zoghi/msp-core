@@ -1,13 +1,13 @@
 package msp.core.dto;
 
 import lombok.Getter;
-import msp.core.model.BaseEntity;
+import msp.core.model.GenericBaseEntity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * DTO for {@link BaseEntity}
+ * DTO for {@link GenericBaseEntity}
  */
 @Getter
 public class BaseEntityDto implements Serializable {

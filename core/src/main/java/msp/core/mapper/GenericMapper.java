@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * @param <D> is Dto
  */
 @Mapper
-public interface BaseMapper<E, D> {
+public interface GenericMapper<E, D> {
     D toDto(E source);
     E toEntity(D dto);
     default List<D> toDtoList(List<E> sourceList) {
