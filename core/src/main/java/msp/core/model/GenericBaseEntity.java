@@ -41,6 +41,12 @@ public abstract class GenericBaseEntity<ID extends Serializable>  {
     @Column(name = "description")
     private String description;
 
+    @Column(nullable = false)
+    private Boolean isEnabled;
+
+    @Column(nullable = false)
+    private Boolean isDeleted;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -50,12 +56,6 @@ public abstract class GenericBaseEntity<ID extends Serializable>  {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-
-    @Column(nullable = false)
-    private Boolean isEnabled;
-
-    @Column(nullable = false)
-    private Boolean isDeleted;
 
 
     @Override
