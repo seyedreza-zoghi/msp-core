@@ -51,24 +51,25 @@ public abstract class GenericBaseEntity<ID extends Serializable>  {
         updatedAt = LocalDateTime.now();
     }
 
-    @Override
-    public String
-    toString() {
-        return "GenericBaseEntity{" +
-                "id=" + id +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", version=" + version +
-                ", description='" + description + '\'' +
-                '}';
-    }
+    @Column(nullable = false)
+    private Boolean isEnabled;
+
+    @Column(nullable = false)
+    private Boolean isDeleted;
+
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         GenericBaseEntity<?> that = (GenericBaseEntity<?>) object;
-        return Objects.equals(id, that.id) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(version, that.version) && Objects.equals(description, that.description);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(createdAt, that.createdAt) &&
+                Objects.equals(updatedAt, that.updatedAt) &&
+                Objects.equals(version, that.version) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(isEnabled, that.isEnabled) &&
+                Objects.equals(isDeleted, that.isDeleted);
     }
 
     @Override
